@@ -5,16 +5,19 @@
 #or like sw.PNG
 
 def print_matrix1(a,x,y):
-	mrows = len(x)
-	ncols = len(y)
+	mrows = len(x) + 1
+	ncols = len(y) + 1
 
 	print("     ", end=' ')
-	for i in range(ncols):
-		print("%2c" % y[i], end=' ')
+	for i in range(1, ncols):
+		print("%2c" % y[i - 1], end=' ')
 	print()
 
 	for i in range(mrows):
-		print("%2c" % x[i], end=' ')
+		if i > 0:
+			print("%2c" % x[i - 1], end=' ')
+		else:
+			print("  ", end=' ')
 		for j in range(ncols):
 			print("%2d" % a[i][j], end=' ')
 		print()
@@ -40,7 +43,7 @@ def gen_matrix(x, y, match_score=3, gap_cost=2):
 			insert = a[i][j - 1] - gap_cost
 			a[i][j]=max(match,delete,insert,0)
 
-	#print_matrix(a,x,y)	
+	# print_matrix1(a,x,y)	
 	return(a)
 	
 x = "GGTTGACTA"	
